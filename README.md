@@ -4,7 +4,7 @@
 [![NPM downloads](http://img.shields.io/npm/dm/count-cli.svg?style=flat-square)](https://www.npmjs.com/package/count-cli)
 
 ## About
-
+Count files and directories including hidden and visible items
 
 ## How to Install
 First, install the CLI by npm:
@@ -12,13 +12,16 @@ First, install the CLI by npm:
 $ npm install -g count-cli
 ```
 
-## Commands
+## How to Use
 #### 
 ```bash
-$ count-cli
+$ count-cli [options]
 ```
 
 **Instead of `count-cli` you can use alias: `cc`**
+
+## Options
+- `-r, --recurresive` output result including files from sub-directories
 
 ## License
 This project is licensed under the MIT License © 2020-present Jakub Biesiada

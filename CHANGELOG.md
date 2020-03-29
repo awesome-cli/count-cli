@@ -2,4 +2,4 @@
 
 ## 1.0.0 (2020-04-01)
 #### New Feature
-- 
+- count files & directories 
