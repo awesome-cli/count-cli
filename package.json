@@ -23,7 +23,7 @@
   "homepage": "https://github.com/JB1905/count-cli#readme",
   "bin": {
     "count-cli": "bin/index.js",
-    "ii": "bin/index.js"
+    "cc": "bin/index.js"
   },
   "dependencies": {
     "chalk": "^3.0.0",
