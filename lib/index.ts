@@ -16,8 +16,8 @@ const pkg = require(path.join(__dirname, '../package.json'));
 program
   .version(pkg.version)
   .description(pkg.description)
-  .usage('<cmd>')
-  .option('-r, --recurresive')
+  .usage('[options]')
+  .option('-r, --recurresive', '')
   .action(async ({ recurresive }) => {
     // const dirs = await readdirasync('.');
     // const visibleDirs = files.filter((file) => !/(^|\/)\.[^\/\.]/g.test(file));
@@ -52,7 +52,7 @@ program
 
 program.on('--help', () => {
   console.log(
-    chalk.greenBright(figlet.textSync('', { horizontalLayout: 'full' }))
+    chalk.red(figlet.textSync('Count CLI', { horizontalLayout: 'full' }))
   );
 });
 
