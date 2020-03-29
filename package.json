@@ -16,7 +16,14 @@
   "engines": {
     "node": ">=10"
   },
-  "keywords": [],
+  "keywords": [
+    "cli",
+    "counter",
+    "directories",
+    "files",
+    "hidden",
+    "visible"
+  ],
   "bugs": {
     "url": "https://github.com/JB1905/count-cli/issues"
   },
