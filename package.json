@@ -1,7 +1,7 @@
 {
   "name": "count-cli",
   "version": "1.0.0",
-  "description": "",
+  "description": "Count files and directories",
   "author": "Jakub Biesiada",
   "license": "MIT",
   "main": "bin/index.js",

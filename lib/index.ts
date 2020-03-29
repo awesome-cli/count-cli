@@ -19,11 +19,9 @@ program
   .usage('[options]')
   .option('-r, --recurresive', '')
   .action(async ({ recurresive }) => {
-    // const dirs = await readdirasync('.');
-    // const visibleDirs = files.filter((file) => !/(^|\/)\.[^\/\.]/g.test(file));
-    // const hiddenDirs = files.filter((file) => !/(^|\/)\.[^\/\.]/g.test(file));
-
     let files: string[];
+
+    const isHidden = (file: string) => !/(^|\/)\.[^\/\.]/g.test(file);
 
     if (recurresive) {
       files = (await readRecursiveAsync('.')) as string[];
@@ -31,23 +29,46 @@ program
       files = await readDirAsync('.');
     }
 
-    const hiddenFiles = files.filter((file) => !/(^|\/)\.[^\/\.]/g.test(file));
+    let hiddenFiles = [];
+    let visibleFiles = [];
 
-    console.log(`Visible Files: ${files.length - hiddenFiles.length}`);
+    let visibleDirs = [];
+    let hiddenDirs = [];
+
+    files.map((file) => {
+      if (fs.statSync(file).isDirectory()) {
+        if (isHidden(file)) {
+          hiddenDirs.push(file);
+        } else {
+          visibleDirs.push(file);
+        }
+      } else {
+        if (isHidden(file)) {
+          hiddenFiles.push(file);
+        } else {
+          visibleFiles.push(file);
+        }
+      }
+    });
+
+    const allFiles = visibleFiles.length + hiddenFiles.length;
+    const allDirs = visibleDirs.length + hiddenDirs.length;
+
+    console.log(`Visible Files: ${visibleFiles.length}`);
     console.log(`Hidden Files: ${hiddenFiles.length}`);
-    console.log(`All Files: ${files.length}`);
-
-    // console.log('');
-
-    // console.log(`Visible Directories: ${visibleDirs.length}`);
-    // console.log(`Hidden Directories: ${hiddenDirs.length}`);
-    // console.log(`All Directories: ${dirs.length}`);
+    console.log(`All Files: ${allFiles}`);
 
     console.log('');
 
-    console.log(`All Visible: ${files.length}`);
-    console.log(`All Hidden: ${files.length}`);
-    console.log(`All: ${files.length}`);
+    console.log(`Visible Directories: ${visibleDirs.length}`);
+    console.log(`Hidden Directories: ${hiddenDirs.length}`);
+    console.log(`All Directories: ${allDirs}`);
+
+    console.log('');
+
+    console.log(`All Visible: ${visibleFiles.length + visibleDirs.length}`);
+    console.log(`All Hidden: ${hiddenFiles.length + hiddenDirs.length}`);
+    console.log(`All: ${allFiles + allDirs}`);
   });
 
 program.on('--help', () => {
