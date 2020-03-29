@@ -21,7 +21,7 @@ program
     '-r, --recurresive',
     'output result including files from sub-directories'
   )
-  .action(async ({ recurresive }) => {
+  .action(async ({ recurresive }: { recurresive: boolean }) => {
     let files: string[];
 
     const isHidden = (file: string) => !/(^|\/)\.[^\/\.]/g.test(file);
@@ -32,11 +32,11 @@ program
       files = await readDirAsync('.');
     }
 
-    const hiddenFiles = [];
-    const visibleFiles = [];
+    const hiddenFiles: string[] = [];
+    const visibleFiles: string[] = [];
 
-    const visibleDirs = [];
-    const hiddenDirs = [];
+    const visibleDirs: string[] = [];
+    const hiddenDirs: string[] = [];
 
     files.map((file) => {
       if (fs.statSync(file).isDirectory()) {
