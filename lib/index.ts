@@ -17,7 +17,10 @@ program
   .version(pkg.version)
   .description(pkg.description)
   .usage('[options]')
-  .option('-r, --recurresive', '')
+  .option(
+    '-r, --recurresive',
+    'output result including files from sub-directories'
+  )
   .action(async ({ recurresive }) => {
     let files: string[];
 
@@ -29,11 +32,11 @@ program
       files = await readDirAsync('.');
     }
 
-    let hiddenFiles = [];
-    let visibleFiles = [];
+    const hiddenFiles = [];
+    const visibleFiles = [];
 
-    let visibleDirs = [];
-    let hiddenDirs = [];
+    const visibleDirs = [];
+    const hiddenDirs = [];
 
     files.map((file) => {
       if (fs.statSync(file).isDirectory()) {
@@ -54,21 +57,33 @@ program
     const allFiles = visibleFiles.length + hiddenFiles.length;
     const allDirs = visibleDirs.length + hiddenDirs.length;
 
-    console.log(`Visible Files: ${visibleFiles.length}`);
-    console.log(`Hidden Files: ${hiddenFiles.length}`);
-    console.log(`All Files: ${allFiles}`);
+    console.log(
+      chalk.cyanBright(
+        `Visible Files: ${visibleFiles.length}\n` +
+          `Hidden Files: ${hiddenFiles.length}\n` +
+          `All Files: ${allFiles}`
+      )
+    );
 
     console.log('');
 
-    console.log(`Visible Directories: ${visibleDirs.length}`);
-    console.log(`Hidden Directories: ${hiddenDirs.length}`);
-    console.log(`All Directories: ${allDirs}`);
+    console.log(
+      chalk.greenBright(
+        `Visible Directories: ${visibleDirs.length}\n` +
+          `Hidden Directories: ${hiddenDirs.length}\n` +
+          `All Directories: ${allDirs}`
+      )
+    );
 
     console.log('');
 
-    console.log(`All Visible: ${visibleFiles.length + visibleDirs.length}`);
-    console.log(`All Hidden: ${hiddenFiles.length + hiddenDirs.length}`);
-    console.log(`All: ${allFiles + allDirs}`);
+    console.log(
+      chalk.yellowBright(
+        `All Visible: ${visibleFiles.length + visibleDirs.length}\n` +
+          `All Hidden: ${hiddenFiles.length + hiddenDirs.length}\n` +
+          `All: ${allFiles + allDirs}`
+      )
+    );
   });
 
 program.on('--help', () => {
