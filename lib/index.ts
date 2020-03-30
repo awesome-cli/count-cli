@@ -7,9 +7,12 @@ import chalk from 'chalk';
 import * as fs from 'fs';
 import { promisify } from 'util';
 import recursive from 'recursive-readdir';
+import ora from 'ora';
 
 const readDirAsync = promisify(fs.readdir);
 const readRecursiveAsync = promisify(recursive);
+
+const spinner = ora();
 
 const pkg = require(path.join(__dirname, '../package.json'));
 
@@ -26,11 +29,15 @@ program
 
     const isHidden = (file: string) => !/(^|\/)\.[^\/\.]/g.test(file);
 
+    spinner.start('Checking directories');
+
     if (recurresive) {
       files = (await readRecursiveAsync('.')) as string[];
     } else {
       files = await readDirAsync('.');
     }
+
+    spinner.stop();
 
     const hiddenFiles: string[] = [];
     const visibleFiles: string[] = [];
