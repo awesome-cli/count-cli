@@ -46,6 +46,8 @@ program
     const hiddenDirs: string[] = [];
 
     files.map((file) => {
+      console.log(fs.statSync(file));
+
       if (fs.statSync(file).isDirectory()) {
         if (isHidden(file)) {
           hiddenDirs.push(file);
