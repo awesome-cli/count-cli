@@ -21,10 +21,10 @@ program
   .description(pkg.description)
   .usage('[options]')
   .option(
-    '-r, --recurresive',
+    '-r, --recurresive [depth]',
     'output result including files from sub-directories'
   )
-  .action(async ({ recurresive }: { recurresive: boolean }) => {
+  .action(async ({ recurresive }: { recurresive: boolean | string }) => {
     let files: string[];
 
     const isHidden = (file: string) => !/(^|\/)\.[^\/\.]/g.test(file);
@@ -46,7 +46,7 @@ program
     const hiddenDirs: string[] = [];
 
     files.map((file) => {
-      console.log(fs.statSync(file));
+      // console.log(fs.statSync(file));
 
       if (fs.statSync(file).isDirectory()) {
         if (isHidden(file)) {
