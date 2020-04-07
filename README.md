@@ -22,6 +22,8 @@ $ count-cli [options]
 
 ## Options
 - `-r, --recursive` output result including files from sub-directories
+- `-x, --exclude [dirs ...]` output result without given files & directories
+- `-i, --include [dirs ...]` output result for given files & directories
 
 ## License
 This project is licensed under the MIT License © 2020-present Jakub Biesiada

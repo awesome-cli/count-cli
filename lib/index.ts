@@ -19,13 +19,19 @@ program
     '-r, --recursive [depth]',
     'output result including files from sub-directories'
   )
-  .option('-x, --exclude [...dirs]', '')
-  .option('-i, --include [...dirs]', '')
+  .option(
+    '-x, --exclude [dirs ...]',
+    'output result without given files & directories'
+  )
+  .option(
+    '-i, --include [dirs ...]',
+    'output result for given files & directories'
+  )
   .action(
     async ({
       recursive = false,
-      exclude,
-      include,
+      exclude = [],
+      include = [],
     }: {
       recursive: boolean | string;
       exclude: any;
@@ -34,6 +40,11 @@ program
       const isHidden = (file: string) => !/(^|\/)\.[^\/\.]/g.test(file);
 
       spinner.start('Checking directories');
+
+      // console.log({
+      //   exclude,
+      //   include,
+      // });
 
       const files = await rra.list('.', {
         ignoreFolders: false,
