@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@types/figlet": "^1.2.0",
-    "@types/node": "^13.11.0",
+    "@types/node": "^13.11.1",
     "@types/recursive-readdir": "^2.2.0",
     "husky": "^4.2.3",
     "lint-staged": "^10.1.2",

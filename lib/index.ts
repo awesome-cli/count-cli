@@ -30,8 +30,8 @@ program
   .action(
     async ({
       recursive = false,
-      exclude = [],
-      include = [],
+      exclude,
+      include,
     }: {
       recursive: boolean | string;
       exclude: any;
@@ -41,16 +41,15 @@ program
 
       spinner.start('Checking directories');
 
-      // console.log({
-      //   exclude,
-      //   include,
-      // });
+      // console.log(!!exclude);
+
+      // console.log(exclude, !!exclude ? [exclude] : []);
 
       const files = await rra.list('.', {
         ignoreFolders: false,
         recursive,
-        exclude,
-        include,
+        exclude: !!exclude ? [exclude] : [],
+        include: !!include ? [include] : [],
       });
 
       spinner.stop();
