@@ -11,6 +11,10 @@ const spinner = ora();
 
 const pkg = require(path.join(__dirname, '../package.json'));
 
+function collect(value: string, previous: string[]) {
+  return previous.concat([value]);
+}
+
 program
   .version(pkg.version)
   .description(pkg.description)
@@ -21,11 +25,15 @@ program
   )
   .option(
     '-x, --exclude [dirs ...]',
-    'output result without given files & directories'
+    'output result without given files & directories',
+    collect,
+    []
   )
   .option(
     '-i, --include [dirs ...]',
-    'output result for given files & directories'
+    'output result for given files & directories',
+    collect,
+    []
   )
   .action(
     async ({
@@ -34,22 +42,18 @@ program
       include,
     }: {
       recursive: boolean | string;
-      exclude: any;
-      include: any;
+      exclude: string[];
+      include: string[];
     }) => {
       const isHidden = (file: string) => !/(^|\/)\.[^\/\.]/g.test(file);
 
       spinner.start('Checking directories');
 
-      // console.log(!!exclude);
-
-      // console.log(exclude, !!exclude ? [exclude] : []);
-
       const files = await rra.list('.', {
         ignoreFolders: false,
         recursive,
-        exclude: !!exclude ? [exclude] : [],
-        include: !!include ? [include] : [],
+        exclude,
+        include,
       });
 
       spinner.stop();
