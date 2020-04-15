@@ -21,7 +21,7 @@ $ count-cli [options]
 **Instead of `count-cli` you can use alias: `cc`**
 
 ## Options
-- `-r, --recursive` output result including files from sub-directories
+- `-r, --recursive [depth]` output result including files from sub-directories
 - `-x, --exclude [dirs ...]` output result without given files & directories
 - `-i, --include [dirs ...]` output result for given files & directories
 

@@ -20,7 +20,7 @@ program
   .description(pkg.description)
   .usage('[options]')
   .option(
-    '-r, --recursive',
+    '-r, --recursive [depth]',
     'output result including files from sub-directories'
   )
   .option(
