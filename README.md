@@ -1,4 +1,4 @@
-# [Count CLI](https://github.com/jb1905/count-cli)
+# [Count CLI](https://github.com/awesome-cli/count-cli)
 
 [![NPM version](http://img.shields.io/npm/v/count-cli.svg?style=flat-square)](https://www.npmjs.com/package/count-cli)
 [![NPM downloads](http://img.shields.io/npm/dm/count-cli.svg?style=flat-square)](https://www.npmjs.com/package/count-cli)
