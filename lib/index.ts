@@ -7,13 +7,11 @@ import chalk from 'chalk';
 import rra from 'recursive-readdir-async';
 import ora from 'ora';
 
+import { collect } from './helpers/collect';
+
 const spinner = ora();
 
 const pkg = require(path.join(__dirname, '../package.json'));
-
-function collect(value: string, previous: string[]) {
-  return previous.concat([value]);
-}
 
 program
   .version(pkg.version)
@@ -45,7 +43,7 @@ program
       exclude: string[];
       include: string[];
     }) => {
-      const isHidden = (file: string) => !/(^|\/)\.[^\/\.]/g.test(file);
+      const isHidden = (file: string) => /(^|\/)\.[^\/\.]/g.test(file);
 
       spinner.start('Checking directories');
 
