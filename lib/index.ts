@@ -8,6 +8,7 @@ import rra from 'recursive-readdir-async';
 import ora from 'ora';
 
 import { collect } from './helpers/collect';
+import { isHidden } from './helpers/is-hidden';
 
 const spinner = ora();
 
@@ -43,8 +44,6 @@ program
       exclude: string[];
       include: string[];
     }) => {
-      const isHidden = (file: string) => /(^|\/)\.[^\/\.]/g.test(file);
-
       spinner.start('Checking directories');
 
       const files = await rra.list('.', {
