@@ -1,6 +1,6 @@
 {
   "name": "count-cli",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Count files and directories",
   "author": "Jakub Biesiada",
   "license": "MIT",
@@ -34,17 +34,17 @@
   },
   "dependencies": {
     "chalk": "^4.0.0",
-    "commander": "^5.0.0",
-    "figlet": "^1.3.0",
-    "ora": "^4.0.3",
+    "commander": "^5.1.0",
+    "figlet": "^1.4.0",
+    "ora": "^4.0.4",
     "recursive-readdir-async": "^1.1.6"
   },
   "devDependencies": {
     "@types/figlet": "^1.2.0",
-    "@types/node": "^13.11.1",
+    "@types/node": "^13.13.5",
     "husky": "^4.2.5",
-    "lint-staged": "^10.1.3",
-    "prettier": "^2.0.4",
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.0.5",
     "typescript": "^3.8.3"
   },
   "husky": {
