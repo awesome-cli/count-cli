@@ -20,6 +20,7 @@ program
   .version(pkg.version)
   .description(pkg.description)
   .usage('[options]')
+  .option('-s, --size', 'output files size')
   .option(
     '-r, --recursive [depth]',
     'output result including files from sub-directories'
@@ -36,7 +37,7 @@ program
     collect,
     []
   )
-  .action(async ({ recursive = false, exclude, include }: Params) => {
+  .action(async ({ size, recursive = false, exclude, include }: Params) => {
     spinner.start('Checking directories');
 
     const files = await rra.list('.', {
@@ -74,31 +75,34 @@ program
     const allDirs = visibleDirs.length + hiddenDirs.length;
 
     console.log(
-      chalk.cyanBright(
-        `Visible Files: ${visibleFiles.length}\n` +
-          `Hidden Files: ${hiddenFiles.length}\n` +
-          `All Files: ${allFiles}`
-      )
+      chalk.bold.cyan(`Files:\n`) +
+        chalk.cyanBright(
+          `Visible: ${visibleFiles.length}\n` +
+            `Hidden: ${hiddenFiles.length}\n` +
+            `All: ${allFiles}`
+        )
     );
 
     console.log('');
 
     console.log(
-      chalk.greenBright(
-        `Visible Directories: ${visibleDirs.length}\n` +
-          `Hidden Directories: ${hiddenDirs.length}\n` +
-          `All Directories: ${allDirs}`
-      )
+      chalk.bold.green(`Directories:\n`) +
+        chalk.greenBright(
+          `Visible: ${visibleDirs.length}\n` +
+            `Hidden: ${hiddenDirs.length}\n` +
+            `All: ${allDirs}`
+        )
     );
 
     console.log('');
 
     console.log(
-      chalk.yellowBright(
-        `All Visible: ${visibleFiles.length + visibleDirs.length}\n` +
-          `All Hidden: ${hiddenFiles.length + hiddenDirs.length}\n` +
-          `All: ${allFiles + allDirs}`
-      )
+      chalk.bold.yellow(`Summed up:\n`) +
+        chalk.yellowBright(
+          `Visible: ${visibleFiles.length + visibleDirs.length}\n` +
+            `Hidden: ${hiddenFiles.length + hiddenDirs.length}\n` +
+            `All: ${allFiles + allDirs}`
+        )
     );
   });
 

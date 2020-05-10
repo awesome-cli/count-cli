@@ -30,6 +30,7 @@
   "homepage": "https://github.com/awesome-cli/count-cli#readme",
   "bin": {
     "count-cli": "bin/index.js",
+    "count": "bin/index.js",
     "cc": "bin/index.js"
   },
   "dependencies": {
