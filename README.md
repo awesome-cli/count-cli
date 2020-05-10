@@ -18,7 +18,7 @@ $ npm install -g count-cli
 $ count-cli [options]
 ```
 
-**Instead of `count-cli` you can use alias: `cc`**
+**Instead of `count-cli` you can use aliases: `count` & `cc`**
 
 ## Options
 - `-r, --recursive [depth]` output result including files from sub-directories
