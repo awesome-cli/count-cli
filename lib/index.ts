@@ -20,10 +20,9 @@ program
   .version(pkg.version)
   .description(pkg.description)
   .usage('[options]')
-  .option('-s, --size', 'output files size')
   .option(
-    '-r, --recursive [depth]',
-    'output result including files from sub-directories'
+    '-r, --recursive',
+    'output result including files from subdirectories'
   )
   .option(
     '-x, --exclude [dirs ...]',
@@ -37,7 +36,7 @@ program
     collect,
     []
   )
-  .action(async ({ size, recursive = false, exclude, include }: Params) => {
+  .action(async ({ recursive = false, exclude, include }: Params) => {
     spinner.start('Checking directories');
 
     const files = await rra.list('.', {
