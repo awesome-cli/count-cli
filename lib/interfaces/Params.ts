@@ -1,5 +1,6 @@
 export interface Params {
-  recursive: boolean;
+  size: boolean;
+  recursive: boolean | string;
   exclude: string[];
   include: string[];
 }
