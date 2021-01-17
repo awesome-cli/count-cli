@@ -16,6 +16,13 @@ const spinner = ora();
 
 const pkg = require(path.join(__dirname, '../package.json'));
 
+type File = {
+  readonly name: string;
+  readonly path: string;
+  readonly fullname: string;
+  readonly isDirectory: boolean;
+};
+
 program
   .version(pkg.version)
   .description(pkg.description)
@@ -37,10 +44,10 @@ program
     collect,
     []
   )
-  .action(async ({ size, recursive = false, exclude, include }: Params) => {
+  .action(async ({ recursive = false, exclude, include }: Params) => {
     spinner.start('Checking directories');
 
-    const files = await rra.list('.', {
+    const files: File[] = await rra.list('.', {
       ignoreFolders: false,
       recursive,
       exclude,
@@ -55,19 +62,19 @@ program
     const visibleDirs: string[] = [];
     const hiddenDirs: string[] = [];
 
-    files.map((file: any) => {
+    files.map((file) => {
+      const addToList = (hidden: string[], visible: string[]) => {
+        if (isHidden(file.fullname)) {
+          hidden.push(file.name);
+        } else {
+          visible.push(file.name);
+        }
+      };
+
       if (file.isDirectory) {
-        if (isHidden(file.fullname)) {
-          hiddenDirs.push(file);
-        } else {
-          visibleDirs.push(file);
-        }
+        addToList(hiddenDirs, visibleDirs);
       } else {
-        if (isHidden(file.fullname)) {
-          hiddenFiles.push(file);
-        } else {
-          visibleFiles.push(file);
-        }
+        addToList(hiddenFiles, visibleFiles);
       }
     });
 
